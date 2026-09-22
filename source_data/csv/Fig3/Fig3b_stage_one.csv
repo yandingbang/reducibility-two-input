@@ -1,0 +1,5 @@
+"# Fig. 3b: wound closure, slow / intermediate / fast migration"
+regime,alpha_bar_deg,sigma_alpha_deg,sigma_noise_deg,q95_deg,sigma_true_hat_deg,tau_1_deg,stage_one,condition
+"Wound, slow migration",6.91337749,2.456763874,2.101929138,1.570092856,1.271842221,4,REDUCIBLE,sigma_true_hat <= tau_1 and q95 < tau_1
+"Wound, intermediate",66.0754844,11.04517078,0.4703389444,0.36308046,11.03515196,4,NOT-RED,"sigma_true_hat > max(tau_1, q95)"
+"Wound, fast migration",89.6583942,0.602945985,0.5452787538,0.4351600521,0.2573226408,4,REDUCIBLE,sigma_true_hat <= tau_1 and q95 < tau_1

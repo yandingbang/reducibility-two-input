@@ -1,0 +1,11 @@
+"# Fig. 5: x = sigma_true_hat / max(tau_1, q95), y = rho_true_hat / max(tau, tau_min); the realisation of Table 1"
+# the last column is the mode of the joint verdict over the 8 realisations of benchmarks/run_benchmarks.py
+regime,x_stage_one_ratio,y_stage_two_ratio,sigma_true_hat_deg,q95_deg,tau_1_deg,rho_true_hat,tau_min,tau,verdict,verdict_mode_over_8_realisations
+"Rough-pipe, low Re",0.1398403811,0,0.5593615244,0.7519490345,4,0,0.008998627887,0.05,REDUCIBLE,REDUCIBLE
+"Rough-pipe, high Re",0,0,0,0.8588414169,4,0,0.008678332392,0.05,REDUCIBLE,REDUCIBLE
+Microfluidic,0,0,0,2.279711902,4,0,0.007285271912,0.05,REDUCIBLE,REDUCIBLE
+Column buckling,0.1567580688,0,0.627032275,0.7446009836,4,0,0.009013223876,0.05,REDUCIBLE,REDUCIBLE
+"Rough-pipe, medium Re",2.468852341,2.969878256,9.875409364,0.5778081989,4,0.1484939128,0.01017003156,0.05,NOT-RED,NOT-RED
+"Wound, fast migration",0.0643306602,0.1438248507,0.2573226408,0.4351600521,4,0.007191242533,0.007991879534,0.05,REDUCIBLE,REDUCIBLE
+"Wound, intermediate",2.758787991,3.647069228,11.03515196,0.36308046,4,0.1823534614,0.009173422714,0.05,NOT-RED,NOT-RED
+"Wound, slow migration",0.3179605553,0.2427235272,1.271842221,1.570092856,4,0.01213617636,0.007878650807,0.05,REDUCIBLE,REDUCIBLE

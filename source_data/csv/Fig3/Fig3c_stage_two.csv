@@ -1,0 +1,5 @@
+"# Fig. 3c: wound closure, closure time T_c r against ln u_hat"
+regime,a_star_deg,exponent_Pi1,exponent_Pi2,polynomial_degree,u_mean,u_sd,polynomial_coefficients_highest_first_on_(u-u_mean)/u_sd,rho,tau_min,rho_true_hat,tau,stage_two,condition,joint_verdict
+"Wound, slow migration",6.447239319,0.9936756773,0.1122882376,2,-6.292553059,0.5414781906,0.1883894848 -1.709899994 7.468445345,0.01446927487,0.007878650807,0.01213617636,0.05,REDUCIBLE,rho_true_hat <= tau and tau_min < tau,REDUCIBLE
+"Wound, intermediate",69.74291357,0.3462330914,0.9381485204,2,-1.470697678,0.5292328483,-0.02226614722 -0.5235360649 1.578566143,0.1825840534,0.009173422714,0.1823534614,0.05,NOT-RED,"rho_true_hat > max(tau, tau_min)",NOT-RED
+"Wound, fast migration",89.6583942,0.005962110545,0.9999822265,3,-1.604537201,0.3765757862,-0.003624477487 -0.01765483366 -0.4605137269 1.537259242,0.01075100496,0.007991879534,0.007191242533,0.05,REDUCIBLE,rho_true_hat <= tau and tau_min < tau,REDUCIBLE

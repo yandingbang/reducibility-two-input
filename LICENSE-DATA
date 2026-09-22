@@ -1,0 +1,12 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+The data files of this repository -- every *.npz under benchmarks/data/ and si_data/data/,
+and the Source Data workbooks and CSVs under source_data/ -- are licensed under the Creative
+Commons Attribution 4.0 International licence. You may share and adapt them for any purpose,
+provided you give appropriate credit by citing the paper and the repository named in
+README.md.
+
+Full licence text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The images under figures/fig3/img/ and figures/fig5/img/ are [CHECK: own work, licensed
+CC BY 4.0 as above / reproduced from <source> with permission, all rights reserved].

@@ -1,0 +1,5 @@
+"# Fig. 2d: rough pipe, low / medium / high Re"
+regime,alpha_bar_deg,sigma_alpha_deg,sigma_noise_deg,q95_deg,sigma_true_hat_deg,tau_1_deg,stage_one,condition
+"Rough-pipe, low Re",179.9301151,1.077405506,0.9208242559,0.7519490345,0.5593615244,4,REDUCIBLE,sigma_true_hat <= tau_1 and q95 < tau_1
+"Rough-pipe, medium Re",102.7106065,9.902086476,0.7263652459,0.5778081989,9.875409364,4,NOT-RED,"sigma_true_hat > max(tau_1, q95)"
+"Rough-pipe, high Re",90.05493433,0.4614777648,0.9570883761,0.8588414169,0,4,REDUCIBLE,sigma_true_hat <= tau_1 and q95 < tau_1

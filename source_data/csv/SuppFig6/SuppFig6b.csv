@@ -1,0 +1,11 @@
+"# Supplementary Fig. 6b: per-anchor RMS read-out error at the deployed probe; chord = 99-angle read-out minus the gradient direction, interpolation = 15-angle minus 99-angle read-out;"
+"# for low Re, microfluidic and buckling the contours are straight and the chord term is exactly 0 (the value listed is the interpolation left on the fine grid)"
+benchmark,chord_rms_deg,interpolation_rms_deg
+"Rough-pipe, low Re",0,0
+"Rough-pipe, high Re",0.009265686914,0.000616676545
+Microfluidic,0.01017606034,0.5085569429
+Column buckling,0.006223674805,0.2381344275
+"Rough-pipe, medium Re",5.764640058,0.1441148769
+"Wound, fast migration",0.2584732638,0.001552652114
+"Wound, intermediate",6.436854743,0.1061510674
+"Wound, slow migration",0.2707012584,0.1147217685
