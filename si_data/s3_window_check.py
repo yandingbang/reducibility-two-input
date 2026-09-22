@@ -59,7 +59,7 @@ for j in range(N_NULL):
     for mxx in LEVELS:
         eps = mxx * eps0
         rg = np.random.default_rng(seed * 19 + int(mxx * 1e6))
-        prof_, pool, yn, _E = merged_run(SFC, F0, eps, rg)
+        prof_, pool, yn, _E = merged_run(SFC, F0, eps, rg, S)
         ab, sa = axial(read_interp(prof_, S, HX, HY))
         rp_dep, a_dep = window_rho(CX, CY, yn, ab, sa, rho_poly)          # deployed
         rp_fw, a_fw = window_floor(CX, CY, yn, ab, sa)                    # floored window

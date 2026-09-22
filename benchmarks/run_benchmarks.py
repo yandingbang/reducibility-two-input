@@ -50,7 +50,7 @@ for ui, (name, key, sub, red) in enumerate(UNITS):
     sa_l, st_l, rp_l, rn_l, tm_l, rt_l, sn_l, q95_l = ([] for _ in range(8))
     rng2 = np.random.default_rng(seed * 13)
     for _ in range(N_REP):
-        prof, pool_r, yn, _E = merged_run(SFC, F0, eps, rng2)
+        prof, pool_r, yn, _E = merged_run(SFC, F0, eps, rng2, S_fr)
         s_noise, q95 = null_sim(prof, S_fr, HX, HY, eps,
                                 np.random.default_rng(rng2.integers(1 << 30)),
                                 N_MC, N_FIELDSIM, pool=pool_r, nrep=N_MERGE)

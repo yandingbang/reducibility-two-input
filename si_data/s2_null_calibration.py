@@ -51,7 +51,7 @@ rg = np.random.default_rng(SEED)
 rec = {k: [] for k in ("sn", "q95", "sa", "st", "exceed", "p")}
 t0 = time.time()
 for r in range(N_RUN):
-    prof, pool, _yn, _E = merged_run(SFC, F0, eps, rg)
+    prof, pool, _yn, _E = merged_run(SFC, F0, eps, rg, S)
     s = int(rg.integers(1 << 30))
     sn, q95, _phi, sa_null = null_sim(prof, S, HX, HY, eps, np.random.default_rng(s),
                                       N_MC, N_FIELDSIM, pool=pool, nrep=N_MERGE, return_null=True)

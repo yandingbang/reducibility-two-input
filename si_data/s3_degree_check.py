@@ -18,7 +18,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from framework import core as F                                   # noqa: E402
-from framework.core import M_ANCH, N_MERGE, DEGREES, merged_run, rho_poly  # noqa: E402
+from framework.core import M_ANCH, N_MERGE, DEGREES, plan_uniform, merged_run, rho_poly  # noqa: E402
 from framework.synthetic import build_field, mk, draw_ridge, calibrate_eps  # noqa: E402
 
 warnings.simplefilter("ignore", np.RankWarning)
@@ -60,13 +60,14 @@ for j in range(N_NULL):
     if not np.all(np.isfinite(FC)):
         continue
     SFC = FC - F0[:, None]
+    S = plan_uniform(M_ANCH)
     t_true = math.atan2(b_, a_) % math.pi
     u_true = math.cos(t_true) * CX + math.sin(t_true) * CY
     r_clean, stop_clean = trace(u_true, F0)
     for mxx in LEVELS:
         eps = mxx * eps0
         rg = np.random.default_rng(seed * 19 + int(mxx * 1e6))
-        _prof, pool, yn, _E = merged_run(SFC, F0, eps, rg)
+        _prof, pool, yn, _E = merged_run(SFC, F0, eps, rg, S)
         tm = F.tau_min(pool, yn)
         r_noisy, stop_noisy = trace(u_true, yn)
         deployed = rho_poly(u_true, yn)

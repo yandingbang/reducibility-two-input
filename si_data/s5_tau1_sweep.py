@@ -49,7 +49,7 @@ for j in range(N_FIELD):
     for mxx in LEVELS:
         eps = mxx * eps0
         rg = np.random.default_rng(seed * 19 + int(mxx * 1e6))
-        prof_, pool, _yn, _E = merged_run(SFC, F0, eps, rg)
+        prof_, pool, _yn, _E = merged_run(SFC, F0, eps, rg, S)
         sn, q95 = null_sim(prof_, S, HX, HY, eps, np.random.default_rng(rg.integers(1 << 30)),
                            N_MC, N_FIELDSIM, pool=pool, nrep=N_MERGE)
         sa = float(axial(read_interp(prof_, S, HX, HY))[1])

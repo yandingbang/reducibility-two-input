@@ -57,7 +57,7 @@ for ui, (name, key, sub, red) in enumerate(UNITS):
     Sa0 = np.array(sorted(S_fr[0]))                 # the NQ queried angles, same at every anchor
 
     rng2 = np.random.default_rng(seed * 13)
-    prof, pool_r, yn, E = merged_run(SFC, F0, eps, rng2)
+    prof, pool_r, yn, E = merged_run(SFC, F0, eps, rng2, S_fr)
     sn, q95, _phi, sa_null = F.null_sim(
         prof, S_fr, HX, HY, eps, np.random.default_rng(rng2.integers(1 << 30)),
         N_MC, N_FIELDSIM, pool=pool_r, nrep=N_MERGE, return_null=True)
@@ -67,7 +67,8 @@ for ui, (name, key, sub, red) in enumerate(UNITS):
     st = F.sigma_true_hat(sa, sn)
     verdict = v1(st, TAU1, q95)
 
-    prof_reps = SFC[None] + E[:, :, :SIZE] - E[:, :, SIZE:]      # each repeat's profile (n, 40, SIZE)
+    prof_reps = np.full((N_MERGE,) + SFC.shape, np.nan)         # each repeat's profile (n, 40, SIZE), nan off the plan
+    prof_reps[:, :, Sa0] = SFC[None, :, Sa0] + E[:, :, :-1] - E[:, :, -1:]
     t0_cross = np.array([interp_cross(prof[i, Sa0], _t[Sa0]) for i in range(M_ANCH)])
     pick, r_over_eps, n_signchg = pick_anchor(prof, Sa0, eps)
 

@@ -51,7 +51,7 @@ for mxx in EPSX_R:
             S = plan_uniform(M_ANCH)
             s_true, _ = sigma_true(resp, CX, CY)
             rg = np.random.default_rng(seed * 19 + int(mxx * 1e6) + int(lam * 1e7))
-            prof, pool, _yn, _E = merged_run(SFC, F0, eps, rg)
+            prof, pool, _yn, _E = merged_run(SFC, F0, eps, rg, S)
             sn, q95 = null_sim(prof, S, HX, HY, eps, np.random.default_rng(rg.integers(1 << 30)),
                                N_MC, N_FIELDSIM, pool=pool, nrep=N_MERGE)
             sa = axial(read_interp(prof, S, HX, HY))[1]

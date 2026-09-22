@@ -84,26 +84,28 @@ def plan_uniform(m):
     return [list(u) for _ in range(m)]
 
 
-def merged_run(SFC, F0, eps, rng, n=None):
+def merged_run(SFC, F0, eps, rng, S, n=None):
     """One run of the protocol: n repeats of every evaluation with independent errors.
 
-    E has shape (n, M, SIZE + 1): the errors are generated for all SIZE candidate angles plus the
-    anchor itself (column SIZE), although only the NQ queried columns enter the profile.  The
-    residual pool is formed from all SIZE + 1 columns, so it holds M (SIZE + 1) n = 24 000
-    residuals instead of the M (NQ + 1) n = 3840 a run of the protocol yields; the errors are
-    i.i.d., so the pool has the same distribution, only a slightly more precise eps_hat (see
-    README and Methods).  Returns
-        prof  the averaged signed profile  s_ik = mean_r y(p_ik) - mean_r y(c_i)   (M x SIZE)
-        pool  the residual pool: within-repeat residuals times sqrt(n / (n - 1))
+    The evaluated points are the NQ queried angles of the plan S (the same at every anchor)
+    and the anchor itself: M (NQ + 1) points, each evaluated n times.  E has shape
+    (n, M, NQ + 1), its last column the anchor; nothing is drawn for unqueried angles.  Returns
+        prof  the averaged signed profile  s_ik = mean_r y(p_ik) - mean_r y(c_i), M x SIZE with
+              the unqueried columns set to nan (only the queried ones exist)
+        pool  the residual pool: the M (NQ + 1) n within-repeat residuals, times sqrt(n / (n - 1))
         yn    the averaged anchor responses                                       (M,)
+        E     the errors, (n, M, NQ + 1)
     The Gaussian errors are the generating model of the benchmarks and synthetic fields; the
     framework itself uses only prof, pool and yn.
     """
     n = N_MERGE if n is None else n
-    E = rng.normal(0.0, eps, (n, SFC.shape[0], SIZE + 1))
-    prof = SFC + E[:, :, :SIZE].mean(0) - E[:, :, SIZE:].mean(0)
+    idx = np.array(sorted(S[0]))
+    assert all(sorted(Si) == list(idx) for Si in S), "the plan must be the same at every anchor"
+    E = rng.normal(0.0, eps, (n, SFC.shape[0], idx.size + 1))
+    prof = np.full(SFC.shape, np.nan)
+    prof[:, idx] = SFC[:, idx] + E[:, :, :-1].mean(0) - E[:, :, -1:].mean(0)
     pool = ((E - E.mean(0, keepdims=True)) * math.sqrt(n / (n - 1.0))).ravel()
-    yn = F0 + E[:, :, SIZE].mean(0)
+    yn = F0 + E[:, :, -1].mean(0)
     return prof, pool, yn, E
 
 

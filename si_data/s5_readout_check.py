@@ -48,7 +48,7 @@ for j in fields:
     sa_clean = float(axial(read_interp(SFC, S, HX, HY))[1])
     sa_noisy = {}
     for mxx in LEVELS:
-        prof_, _pool, _yn, _E = merged_run(SFC, F0, mxx * eps0, np.random.default_rng(seed * 19 + int(mxx * 1e6)))
+        prof_, _pool, _yn, _E = merged_run(SFC, F0, mxx * eps0, np.random.default_rng(seed * 19 + int(mxx * 1e6)), S)
         sa_noisy[mxx] = float(axial(read_interp(prof_, S, HX, HY))[1])
         ref = stored[(j, mxx)][c["sigma_alpha"]]
         assert abs(sa_noisy[mxx] - ref) <= 1e-9, (j, mxx, sa_noisy[mxx], ref)

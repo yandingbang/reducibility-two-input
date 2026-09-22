@@ -93,13 +93,11 @@ s₀ + *j* with s₀ given in each script's header; the derived streams (second 
 calibration, observation noise, null simulation) are documented in `framework/synthetic.py`
 and in the scripts.
 
-Residual pool. `framework.core.merged_run` generates the errors for all 99 candidate angles of
-the fine grid at every anchor, not only for the K = 15 queried ones, and the residual pool is
-formed from all of them: 40 × 100 × 6 = 24 000 residuals instead of the 40 × 16 × 6 = 3840 a
-run of the protocol yields. The 84 unqueried columns never enter the profile. Since the errors
-are i.i.d. the pool has the same distribution either way; the larger pool only makes ε̂
-slightly more precise (relative standard error about 0.5 % instead of 1.3 %). The Methods
-section states this; the verdicts do not depend on it.
+Evaluated points. `framework.core.merged_run` draws errors only for the points a run of the
+protocol evaluates, the K = 15 queried angles and the anchor, n times each: the residual pool
+holds the 40 × 16 × 6 = 3840 within-repeat residuals of the run, and the profile is defined
+only at the queried angles (nan elsewhere). The fine grid of 99 angles is used only by the
+noise-free read-out study of Supplementary Fig. 6.
 
 ## Contents of the data files
 

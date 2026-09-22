@@ -61,7 +61,7 @@ for ui, (name, key, sub, red) in enumerate(UNITS):
     SFC = FC - F0[:, None]
     S_fr = plan_uniform(M_ANCH)
     rng2 = np.random.default_rng(seed * 13)                         # the realisation of fig2_method_data.npz
-    prof, pool_r, _yn, _E = merged_run(SFC, F0, eps, rng2)
+    prof, pool_r, _yn, _E = merged_run(SFC, F0, eps, rng2, S_fr)
     sn, _q95, phi, _sa_null = null_sim(prof, S_fr, HX, HY, eps, np.random.default_rng(rng2.integers(1 << 30)),
                                        N_MC, N_FIELDSIM, pool=pool_r, nrep=N_MERGE, return_null=True)
     p = "u%d_" % ui
@@ -90,7 +90,7 @@ for j in range(N_SYN):
     S = plan_uniform(M_ANCH)
     for mxx in (1.0, 4.0):
         rg = np.random.default_rng(seed * 19 + int(mxx * 1e6))      # the noise draw of s5_tau1_sweep.py
-        prof_, pool, _yn, _E = merged_run(SFC, F0, mxx * eps0, rg)
+        prof_, pool, _yn, _E = merged_run(SFC, F0, mxx * eps0, rg, S)
         sn, _q95, phi, _sa_null = null_sim(prof_, S, HX, HY, mxx * eps0, np.random.default_rng(rg.integers(1 << 30)),
                                            N_MC, N_FIELDSIM, pool=pool, nrep=N_MERGE, return_null=True)
         row = stored[(j, mxx)]

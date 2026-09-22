@@ -59,7 +59,7 @@ save = {"lams": np.array(LAMS), "profile": nm, "seed": SEED, "tau": TAU, "n_merg
 for k, lam in enumerate(LAMS):
     CX, CY, HX, HY, FC, F0 = build_field(mk(sc, f, a_, b_, lam), M_ANCH, SEED)
     SFC = FC - F0[:, None]
-    prof, pool, yn, _E = merged_run(SFC, F0, eps, np.random.default_rng(SEED * 13))    # the same noise for every lam
+    prof, pool, yn, _E = merged_run(SFC, F0, eps, np.random.default_rng(SEED * 13), S)    # the same noise for every lam
     ab, sa = axial(read_interp(prof, S, HX, HY))
     rp, a_star = window_rho(CX, CY, yn, ab, sa, rho_poly)
     u = math.cos(a_star) * CX + math.sin(a_star) * CY
