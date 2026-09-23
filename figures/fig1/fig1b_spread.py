@@ -27,8 +27,8 @@ Two parts, each with one job:
                  the text does (2026-09-17): what the triangle solves for is
                  the estimate, not the field's own sigma_true.
 
-The triangle's PROPORTIONS are real, from the low-Re benchmark (sigma_alpha
-1.077, sigma_noise 0.921, sigma_hat_true 0.559 deg; the identity closes to
+The triangle's PROPORTIONS are real, from the slow-migration wound benchmark (sigma_alpha
+2.573, sigma_noise 2.053, sigma_hat_true 1.551 deg; the identity closes to
 three decimals).  Only the fan's angular width is exaggerated, for the same reason
 as panel a: the real sigma_alpha is about 1 deg.
 
@@ -125,7 +125,7 @@ SHOW_OBS = os.environ.get("SHOW_OBS", "0") == "1"
 # 算出」是题注该承担的。SHOW_EQ=1 可以放回来。
 SHOW_EQ = os.environ.get("SHOW_EQ", "0") == "1"
 
-SA, SN, ST = 1.077, 0.921, 0.559        # real, low-Re benchmark (deg)
+SA, SN, ST = 2.573, 2.053, 1.551        # real, wound closure, slow migration (deg)
 
 R = 1.0
 fig, ax = plt.subplots(figsize=(4.6, 4.0), dpi=220)
@@ -348,7 +348,7 @@ print("rays reach %+.1f to %+.1f sd from the mean; the bracket marks -1 to +1 "
       "sd; tail rays %s" % (_z.min(), _z.max(),
                             "fade with the normal density" if FAN_WEIGHT
                             else "at one opacity"))
-print("triangle from the low-Re benchmark: legs %.3f / %.3f  ->  hypotenuse "
+print("triangle from the slow-migration wound benchmark: legs %.3f / %.3f  ->  hypotenuse "
       "%.4f   vs  sigma_alpha %.3f" % (ST, SN, np.hypot(ST, SN), SA))
 corners = [(tx, ty), (tx + a_leg, ty), (tx + a_leg, ty + b_leg)]
 inside = [c for c in corners if np.hypot(*c) < R and c[1] > 0]

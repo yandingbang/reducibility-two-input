@@ -66,7 +66,7 @@ these versions. Figures use Arial and Times New Roman (installed system fonts).
 | `figures/fig3/plot_a_flow.py` | `fig3_a_flow` | Fig. 3a (micrographs in `fig3/img/`) | |
 | `figures/fig3/plot_regions_field_hist.py`, `plot_collapse.py` | `fig3_stage1`, `fig3_stage2` | Fig. 3b, c | |
 | `figures/fig4/plot_grid_single.py` | `fig4` | Fig. 4 | |
-| `figures/fig5/plot_decision_map.py` | `fig5` | Fig. 5 (pictures in `fig5/img/`) | |
+| `figures/fig5/plot_decision_map.py` | `fig5` (180 mm) | Fig. 5 (pictures in `fig5/img/`) | |
 | `figures/si/plot_s*.py` | `figS1` … `figS6` | Supplementary Figs. 1–6 | |
 | `source_data/export_source_data.py`, `build_xlsx.py` | `source_data/csv/`, `Source_Data_*.xlsx` | the values plotted in every data-driven panel | 1 min |
 

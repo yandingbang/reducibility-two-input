@@ -69,7 +69,15 @@ above that pair.  A picture that would overlap one already placed moves right.  
 Overlaps of pictures, names, points and the axes are checked and printed.
 Arial 7 pt, lines of at least 1 pt, drawn at final size, white background.
 
-Output: fig5.png / .svg, 88 mm wide
+2026-09-22, after the rerun that draws errors only at the evaluated points: four systems
+(high Re, low Re, microfluidic, buckling) sit exactly at (0, 0) and wound fast at y = 0.  The
+figure is now 180 mm wide (the author's choice), the four are drawn 9 mm apart to the left of
+x = 0 (DODGE_MM: -27, -18, -9, 0 mm; only the drawing moves), the negative x band runs to
+-0.030 and the y band to -0.075 so that every picture and name has room, the two pictures under
+the row carry their names beneath them (NAMED_UNDER_PICTURE), and a point's name follows its
+dodged marker.  The caption states that the four values coincide.
+
+Output: fig5.png / .svg, 180 mm wide
 """
 
 import sys
@@ -104,13 +112,16 @@ NAMED = {"Rough-pipe, medium Re": (r"medium $Re$", (0, -6), "center", "top"),
 # a picture above them and another under them, so there is no room by the point itself
 NAMED_OVER_PICTURE = {"Rough-pipe, high Re": r"high $Re$",
                       "Rough-pipe, low Re": r"low $Re$"}
+# the two pictures under the y = 0 row carry their names beneath them (2026-09-22: four
+# systems share (0, 0), so shape alone no longer separates them at a glance)
+NAMED_UNDER_PICTURE = {"Microfluidic": "droplets", "Column buckling": "buckling"}
 NAME_GAP = 0.6                                              # mm, a frame to its name
 POINT_S = 28                                                # marker area, pt^2
 X_LIN, Y_LIN, LINSCALE = 0.01, 0.05, 0.3                    # symlog: linear inside +-X_LIN / +-Y_LIN
 Y_TOP = 12.0
 # the two pairs that fall on (nearly) one spot, drawn side by side; only the drawing moves
-DODGE_MM = {"Rough-pipe, high Re": -1.1, "Microfluidic": 1.1,
-            "Rough-pipe, low Re": -0.6, "Column buckling": 0.6}
+DODGE_MM = {"Rough-pipe, high Re": -27.0, "Microfluidic": -9.0,
+            "Rough-pipe, low Re": -18.0, "Column buckling": 0.0}     # four systems at (0, 0) since the 2026-09-22 rerun
 
 # ---- the system pictures ------------------------------------------------------------
 IMG = ROOT / "img"                                          # the four system pictures
@@ -195,7 +206,7 @@ def main():
           "below 1 on both axes is REDUCIBLE here and not UNRESOLVED"
           % (g1, max(S, key=lambda s: s["q95"])["name"], g2, max(S, key=lambda s: s["tmin"])["name"]))
 
-    W, H = 88 * MM, 100 * MM
+    W, H = 180 * MM, 100 * MM           # double-column width since 2026-09-22 (author's choice)
     L, B, R, T = 0.50, 0.42, 0.10, 0.08
     AXH = H - B - T
     fig = plt.figure(figsize=(W, H), dpi=400)
@@ -205,8 +216,8 @@ def main():
     # the negative bands are wider than the data needs (2026-09-17, the author's idea): they
     # put x = 0 6.5 mm right of the left spine and y = 0 9.2 mm above the bottom one, which is
     # the room a picture needs under a point.  Neither band carries a tick
-    ax.set_xlim(-0.010, 6.0)
-    ax.set_ylim(-0.050, Y_TOP)
+    ax.set_xlim(-0.030, 6.0)           # 2026-09-22: the negative band holds the four dodged markers at (0, 0)
+    ax.set_ylim(-0.075, Y_TOP)          # 2026-09-22: wider, so the names under the two lower pictures clear the axis
 
     # the two thresholds, and the regions they cut; the labels keep their offsets in mm
     ax.axvline(1.0, color=C.C_MUTED, lw=1.0, ls=(0, (4, 3)), zorder=1)
@@ -228,7 +239,9 @@ def main():
                    zorder=3, clip_on=False, transform=shift)
         if u in NAMED:
             name, off, ha, va = NAMED[u]
-            labels[u] = ax.annotate(name, (x[i], y[i]), xytext=off, textcoords="offset points",
+            # the offset follows the drawn (dodged) marker, not the data position
+            off_pt = (off[0] + DODGE_MM.get(u, 0.0) * 72 / 25.4, off[1])
+            labels[u] = ax.annotate(name, (x[i], y[i]), xytext=off_pt, textcoords="offset points",
                                     ha=ha, va=va, fontsize=FS, color=col)
     handles = [Line2D([], [], ls="none", marker=m, markersize=5,
                       markerfacecolor=C.C_MUTED, markeredgecolor="none", label=lab)
@@ -273,13 +286,15 @@ def main():
         px_, py_ = pos[u]
         if where == "right":
             x0, y0 = px_ + r_mark + FRAME_GAP, py_ - FRAME_H / 2
+        elif where == "left":                                # 2026-09-22: high Re, left of the (0, 0) row
+            x0, y0 = px_ - r_mark - FRAME_GAP - FRAME_W, py_ - FRAME_H / 2
         else:
             x0 = min(max(px_ - FRAME_W / 2, axb[0] + 0.5), axb[2] - 0.5 - FRAME_W)
             y0 = py_ + r_mark + FRAME_GAP if where == "above" else py_ - r_mark - FRAME_GAP - FRAME_H
         for _ in range(20):
             grown = (x0 - FRAME_GAP, y0 - FRAME_GAP, x0 + FRAME_W + FRAME_GAP, y0 + FRAME_H + FRAME_GAP)
             hit = [tb for tb in text_boxes if inter(grown, tb)]
-            if not hit or where == "right":
+            if not hit or where in ("right", "left"):
                 break
             if where == "above":
                 y0 = max(tb[3] for tb in hit) + FRAME_GAP
@@ -321,6 +336,9 @@ def main():
         iax.axis("off")
         if u in NAMED_OVER_PICTURE:
             over.text((x0 + x1) / 2, y1 + NAME_GAP, NAMED_OVER_PICTURE[u], ha="center", va="bottom",
+                      fontsize=FS, color=C.VERDICT[verdict[units.index(u)]][2])
+        if u in NAMED_UNDER_PICTURE:
+            over.text((x0 + x1) / 2, y0 - NAME_GAP, NAMED_UNDER_PICTURE[u], ha="center", va="top",
                       fontsize=FS, color=C.VERDICT[verdict[units.index(u)]][2])
 
     # a thin elbow leader where a picture is not over its point (the author's request for
