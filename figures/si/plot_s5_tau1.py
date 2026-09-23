@@ -48,8 +48,8 @@ DATA = ROOT.parent.parent / "si_data" / "data" / "s5_tau1_1200.npz"
 LEVELS = ((1.0, r"Noise $\varepsilon\times1$", "#3f6fa0"),
           (4.0, r"Noise $\varepsilon\times4$", "#c0603a"))
 #          key label,               line style,       marker (as the families of S1)
-ERRORS = (("Wrongly NOT-RED",   "-",              "o"),      # the paper's verdict names
-          ("Wrongly REDUCIBLE", (0, (3.2, 1.6)), "s"))
+ERRORS = (("False NOT-RED",    "-",              "o"),      # the paper's terms (Supplementary Table 3)
+          ("Missed departure", (0, (3.2, 1.6)), "s"))
 TAUS = np.array([0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0, 6.0, 8.0])
 DEPLOYED = 4.0
 DEPLOYED_LS = (0, (1, 2))
