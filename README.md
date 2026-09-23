@@ -78,7 +78,7 @@ The schematic panels of Figs. 1d and 2a–c carry no data and are not generated 
 (`figures/fig3/plot_a_flow.py`) is a schematic around two micrographs. The
 Fig. 1 schematics are included for completeness: `figures/fig1/fig1a_universe.py` (panel a,
 the field with its noise band), `fig1b_spread.py` (panel b, the fan and the triangle; the
-triangle's proportions are the low-Re values of Table 1, typed in) and `fig1c_flow_v2.py`
+triangle's proportions are the slow-migration values of Table 1, typed in) and `fig1c_flow_v2.py`
 (panel c, the flow chart); none of them reads data.
 
 ## Protocol constants and seeds
