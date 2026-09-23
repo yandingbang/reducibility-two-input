@@ -35,7 +35,7 @@ FS = 7
 DATA = ROOT.parent.parent / "si_data" / "data" / "s4_borderline.npz"
 INK = "#1f2937"
 POINT_S = 6.0                                               # marker area, pt^2
-VERDICT = {"reduce": "Reducible", "not-red": "Not reducible", "undet": "Undetermined"}
+VERDICT = {"reduce": "REDUCIBLE", "not-red": "NOT-RED", "undet": "UNRESOLVED"}   # the paper's verdict names
 
 W = 180 * MM
 L, R, CG = 0.50, 0.08, 0.14                                 # inches: left, right, column gap

@@ -115,7 +115,7 @@ def panel_a(A, c):
     fixed_ticks(ax, [10.0 ** k for k in range(int(np.ceil(np.log10(lo))),
                                              int(np.floor(np.log10(hi))) + 1)])
     ax.tick_params(direction="in", length=2)
-    ax.set_xlabel(r"Noise floor $\tau_{\min}$", labelpad=2)
+    ax.set_xlabel(r"Analytical noise scale $\tau_{\min}$", labelpad=2)
     ax.set_ylabel(r"Collapse residual $\rho$", labelpad=2)
     save(fig, "figS3a_floor")
 
@@ -151,11 +151,11 @@ def panel_b(A, c, tau):
     key(ax, [dot(LEVELS[m][1]) for m in order] +
         [Line2D([], [], color=C.C_MUTED, lw=1.0, ls=REF_LS),
          Line2D([], [], color=C.C_MUTED, lw=1.0, ls=TAU_LS)],
-        [LEVELS[m][0] for m in order] + [r"$\rho_{\rm true}=\rho_{\rm clean}$", r"$\tau=5\%$"])
+        [LEVELS[m][0] for m in order] + [r"$\hat\rho_{\rm true}=\rho_{\rm clean}$", r"$\tau=5\%$"])
     fixed_ticks(ax, [v for v in (0, 0.01, 0.05, 0.1, 0.2, 0.4) if v <= hi])
     ax.tick_params(direction="in", length=2)
     ax.set_xlabel(r"Noise-free residual $\rho_{\rm clean}$", labelpad=2)
-    ax.set_ylabel(r"Noise-corrected residual $\rho_{\rm true}$", labelpad=2)
+    ax.set_ylabel(r"Noise-corrected residual $\hat\rho_{\rm true}$", labelpad=2)
     save(fig, "figS3b_estimate")
 
 
