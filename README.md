@@ -2,7 +2,7 @@
 
 Code and data to reproduce every number, table and data-driven figure of
 
-> Yan, D. Testing one-group reducibility in noisy two-input dimensionless response maps. Nature Communications (submitted).
+> Yan, D. Equal-response probing with replicate calibration identifies scaling relations from noisy observations of complex systems. Nature Communications (submitted).
 
 The framework decides whether a two-input dimensionless response Π_o = f(Π_1, Π_2), evaluated
 under additive noise of constant variance, reduces to a single group. Stage one tests whether
